@@ -3,6 +3,8 @@ Anngota Kelompok :
 Annisa Alwidia Arsyanti - 2017051034
 Safiira Rahmah Linisa - 2017051015
 Silvia Rukmana - 2017051047
+
+Link github : https://github.com/AnnisaAlwidiaArsyanti-2017051034/Tugas-Pemrograman-Terstruktur-Find-Word
 */
 
 #include <iostream>
@@ -55,42 +57,9 @@ int main(){
 }
 
 char *getWordVertical(int index){
-	char *vertically = (char*)malloc(cols * sizeof(char));
+	char vertically = (char)malloc(cols * sizeof(char));
 	for(int i=0; i<rows; i++)
 		vertically[i] = words[i][index];
 	
 	return vertically;
-}
-char *reverse(char *str){
-	char rev = (char)malloc(cols * sizeof(char));
-	int j=0;
-	for(int i=cols-1; i>=0; i--){
-		rev[j] = str[i];
-		j+=1;
-	}
-	return rev;
-}
-
-bool searchVertical(char *search){
-	for(int i=0; i<cols; i++)
-		if(strstr(getWordVertical(i), search) != NULL)
-			return true;
-	
-	for(int i=0; i<cols; i++)
-		if(strstr(reverse(getWordVertical(i)), search) != NULL)
-			return true;
-	
-	return false;
-}
-
-bool searchHorizontal(char *search){
-	for(int i=0; i<cols; i++)
-		if(strstr(words[i], search) != NULL)
-			return true;
-	
-	for(int i=0; i<cols; i++)
-		if(strstr(reverse(words[i]), search) != NULL)
-			return true;
-	
-	return false;
 }
