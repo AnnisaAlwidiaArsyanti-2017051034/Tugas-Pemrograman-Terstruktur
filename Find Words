@@ -82,3 +82,15 @@ bool searchVertical(char *search){
 	
 	return false;
 }
+
+bool searchHorizontal(char *search){
+	for(int i=0; i<cols; i++)
+		if(strstr(words[i], search) != NULL)
+			return true;
+	
+	for(int i=0; i<cols; i++)
+		if(strstr(reverse(words[i]), search) != NULL)
+			return true;
+	
+	return false;
+}
