@@ -6,19 +6,39 @@
 using namespace std;
 
 
-int main() {
-string infix1, infix2;
+int main(){
+    string infix1, infix2;
     getline(cin, infix1);
     for (int i = 0; i < (int)infix1.length(); i++){
-        if ((infix1[i])){
+        if (isdigit(infix1[i])){
             infix2 += infix1[i];
-            if (!(isdigit(infix1[i + 1]))){
-                infix2 += " ";
-            }
+        }
+        switch (infix1[i]) {
+            case '-':
+                if(infix1[i+1]=='('){
+                    infix2 += " -1 * ";
+                }else if(isdigit(infix1[i+1])){
+                    infix2 += " - "
+                }
+                break;
+            case '+':
+                infix2 += " + ";
+                break;
+            case '*':
+                infix2 += " * ";
+                break;
+            case '/':
+                infix2 += " / ";
+                break;
+            case '(':
+                infix2 += " ( ";
+                break;
+            case ')':
+                infix2 += " ) ";
+                break;
         }
     }
-       
-    cout << infix2 << endl;
+    
+    cout << infix2;
     return 0;
 }
-
