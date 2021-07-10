@@ -1,0 +1,24 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+string infix1, infix2;
+    getline(cin, infix1);
+    for (int i = 0; i < (int)infix1.length(); i++){
+        if ((infix1[i])){
+            infix2 += infix1[i];
+            if (!(isdigit(infix1[i + 1]))){
+                infix2 += " ";
+            }
+        }
+    }
+       
+    cout << infix2 << endl;
+    return 0;
+}
+
