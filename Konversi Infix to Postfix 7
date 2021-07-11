@@ -31,6 +31,7 @@ int prioritas(char a){
     }
     return 1;  
 }
+
 int main(){
     string infix1, infix2, postfix1, postfix2;
     getline(cin, infix1);                     
@@ -83,3 +84,24 @@ int main(){
         }
        
     }
+for(int i=0;i<(int)infix2.length();i++){
+        tmp = infix2[i];
+        if(Operand(tmp)==true || tmp==' '){
+            postfix1+=tmp;
+        }
+        if(tmp=='-' && Operand(infix2[i+1])){
+            postfix1+=tmp;
+        }
+        if(Operand(tmp) && infix2[i-1]!=' '&& infix2[i+1]==' '){
+            postfix1+="";
+        }
+        if(tmp=='('){
+            st.push(tmp);
+        }
+        if(tmp==')'){
+            while(!(st.empty()) && st.top() != '('){
+                postfix1 += st.top();
+                st.pop();
+            }
+            st.pop();
+        }
