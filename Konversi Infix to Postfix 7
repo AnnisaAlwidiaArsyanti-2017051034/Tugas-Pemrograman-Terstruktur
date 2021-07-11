@@ -105,3 +105,52 @@ for(int i=0;i<(int)infix2.length();i++){
             }
             st.pop();
         }
+        if(Operator(tmp) && (infix2[i-1]==' ' && infix2[i+1]==' ')){
+            if(((st.empty() || st.top()=='('))){
+                st.push(tmp);
+            }
+            else{
+                while(!(st.empty()) && st.top() != '(' && prioritas(st.top())<=prioritas(tmp)){
+                postfix1 += st.top();
+                st.pop();
+            }
+            st.push(tmp);
+            }
+        }
+    
+}
+    while(!(st.empty())){
+        postfix1+=st.top();
+        st.pop();
+    }
+    
+    for(int i=0;i<(int)postfix1.length();i++){
+        if(isdigit(postfix1[i])){
+            postfix2+=postfix1[i];
+            if(!(isdigit(postfix1[i+1]))){
+                postfix2+=" ";
+            }
+        }else if(!(isdigit(postfix1[i])) && postfix1[i]!= ' '){
+            postfix2+=postfix1[i];
+            if (i==0&&isdigit(postfix1[i+1]) && postfix1[i]=='-'){
+                postfix2+="";
+            }
+            else if(postfix1[i]=='-' && postfix1[i+1]=='(' && isdigit(postfix1[i-2])){
+                postfix2+="1 * ";
+            }else if(postfix1[i]=='-' && isdigit(postfix1[i+1]) && !(isdigit(postfix1[i-1]))){
+                postfix2+="";
+            }
+            else if(postfix1[i]=='-' && postfix1[i-2]!=')' && postfix1[i-1]!=')' && postfix1[i+1]=='(' && !(isdigit(postfix1[3-2]))){
+                postfix2+="1 * ";
+            }else if(i==((int)postfix1.length())-1){
+                postfix2+="";
+            }
+            else{
+                postfix2+=" ";
+            }
+        }
+
+    }
+    cout<<postfix2<<endl;    
+    return 0;
+}
