@@ -47,19 +47,20 @@ int main(){
                 break;
             case '(':
                 if(!(isdigit(infix1[i-1]))){
-                    infix2 += " ( ";
-                }else{
-                    infix2 += " ( ";
+                    infix2 += "( ";
+                } else{
+                infix2 += " ( ";
                 }
                 break;
             case ')':
                 if(!(isdigit(infix1[i+1]))){
-                    infix2 += " ) ";
-                }else{
-                    infix2 += " ) ";
+                    infix2 += " )";
+                } else{
+                infix2 += " ) ";
                 }
                 break;
         }
+       
     }
     
     cout << infix2;
