@@ -1,3 +1,9 @@
+/* Anggota Kelompok
+    Annisa Alwidia Arsyanti - 2017051034
+    Safiira Rahmah Linisa - 2017051015
+    Silvia Rukmana - 2017051047
+*/
+
 #include <cmath>
 #include <cstdio>
 #include <vector>
@@ -30,10 +36,18 @@ int main(){
                 infix2 += " / ";
                 break;
             case '(':
-                infix2 += " ( ";
+                if(!(isdigit(infix1[i-1]))){
+                    infix2 += " ( ";
+                }else{
+                    infix2 += " ( ";
+                }
                 break;
             case ')':
-                infix2 += " ) ";
+                if(!(isdigit(infix1[i+1]))){
+                    infix2 += " ) ";
+                }else{
+                    infix2 += " ) ";
+                }
                 break;
         }
     }
