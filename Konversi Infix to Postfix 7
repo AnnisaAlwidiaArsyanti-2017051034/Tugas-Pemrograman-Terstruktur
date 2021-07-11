@@ -4,3 +4,30 @@
     Silvia Rukmana - 2017051047
     https://github.com/AnnisaAlwidiaArsyanti-2017051034/Tugas-Pemrograman-Terstruktur.git
 */
+#include<bits/stdc++.h>
+using namespace std;
+bool Operator(char oper){
+    if(oper=='+'||oper=='-'||oper=='*'||oper=='/' ||oper=='%'){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+bool Operand(char ch){
+    if (((ch>='a')&&(ch<='z'))||((ch>='A')&&(ch<='Z'))||((ch>='0')&&(ch<='9'))){
+         return true;
+    } else{
+        return false;
+    }
+}
+int prioritas(char a){
+    if (a == '*' || a == '/'){
+        return 2;
+    }
+        
+    if (a == '+' || a == '-'){
+        return 3;
+    }
+    return 1;  
+}
