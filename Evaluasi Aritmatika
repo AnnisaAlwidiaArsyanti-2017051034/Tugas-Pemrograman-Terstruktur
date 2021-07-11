@@ -98,5 +98,52 @@ void evaluate(string tokens){
                         ops.push('*');
                     }
                 } 
+            }else{
+                while(!ops.empty() && precedence(ops.top()) >= precedence(tokens[i])){
+                    if(ops.top() == '%'){
+                        int nilai2 = values.top(); values.pop();
+                        int nilai1 = values.top(); values.pop();
+                        ops.pop();
+                        values.push(nilai1%nilai2);
+                    }else{
+                        double nilai2 = values.top(); values.pop();
+                        double nilai1 = values.top(); values.pop();
+                        char op = ops.top(); ops.pop();
+                        values.push(applyOp(nilai1, nilai2, op));
+                    }
+                }
+                ops.push(tokens[i]);
             }
+        }
+    }
+
+    while(!ops.empty()){
+        if(ops.top() == '%'){
+                int nilai2 = values.top(); values.pop();
+                    int nilai1 = values.top(); values.pop();
+                    ops.pop();
+                    values.push(nilai1%nilai2);
+                } else {
+                    double nilai2 = values.top(); values.pop();
+                    double nilai1 = values.top(); values.pop();
+                    char op = ops.top(); ops.pop();
+                    values.push(applyOp(nilai1, nilai2, op));
+        }
+    }
+    cout << values.top() << endl;
+}
+
+int main(){
+    string evaluasi; getline(cin,evaluasi);
+    string baru_evaluasi;
+    for(i=0;i<evaluasi.length();i++){
+        if(evaluasi[i]==' ')
+            continue;
+        else
+            baru_evaluasi+=evaluasi[i];
+    }
+    evaluate(baru_evaluasi);
+    
+    return 0;
+}
     
