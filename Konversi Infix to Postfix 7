@@ -31,3 +31,55 @@ int prioritas(char a){
     }
     return 1;  
 }
+int main(){
+    string infix1, infix2, postfix1, postfix2;
+    getline(cin, infix1);                     
+    char tmp;
+    stack <char> st;
+    for (int i = 0; i < (int)infix1.length(); i++){
+        if (isdigit(infix1[i])){
+            infix2 += infix1[i];
+        }
+        switch (infix1[i]) {
+            case '-':
+                if (i == 0 && isdigit(infix1[i + 1])){
+                    infix2 += "-";
+                } else if(infix1[i+1]=='(' && isdigit(infix1[i - 2])){
+                    infix2 += "-1 * ";
+                } else if (isdigit(infix1[i + 1]) && !(isdigit(infix1[i - 1]))){
+                    infix2 += "-1 * ";
+                } else if (infix1[i - 2] != ')' && infix1[i - 1] != ')' && infix1[i + 1] == '(' && !(isdigit(infix1[3 - 2]))){
+                    infix2 += "-1 * ";
+                } else{
+                    infix2 += " - ";
+                }
+                break;
+            case '+':
+                infix2 += " + ";
+                break;
+            case '*':
+                infix2 += " * ";
+                break;
+            case '/':
+                infix2 += " / ";
+                break;
+            case '%':
+                infix2 += " % ";
+                break;
+            case '(':
+                if(!(isdigit(infix1[i-1]))){
+                    infix2 += "( ";
+                } else{
+                infix2 += " ( ";
+                }
+                break;
+            case ')':
+                if(!(isdigit(infix1[i+1]))){
+                    infix2 += " )";
+                } else{
+                infix2 += " ) ";
+                }
+                break;
+        }
+       
+    }
