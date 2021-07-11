@@ -43,4 +43,60 @@ void evaluate(string tokens){
             i--;
             values.push(nilai);
         }
+        else if(tokens[i] == '(')
+            ops.push(tokens[i]);
+        else if(tokens[i] == ')'){
+            while(!ops.empty() && ops.top() != '('){
+                if(ops.top() == '%'){
+                    int nilai2 = values.top(); values.pop();
+                    int nilai1 = values.top(); values.pop();
+                    ops.pop();
+                    values.push(nilai1%nilai2);
+                } else {
+                    double nilai2 = values.top(); values.pop();
+                    double nilai1 = values.top(); values.pop();
+                    char op = ops.top(); ops.pop();
+                    values.push(applyOp(nilai1, nilai2, op));
+                }
+            }
+            if(!ops.empty())
+                ops.pop();
+        } else {
+            if(tokens[i] == '-'){
+                if(i==0){
+                    if(isdigit(tokens[i+1])){
+                        i++;
+                        int nilai=0;
+                        while(i<tokens.length() && isdigit(tokens[i])){
+                            nilai = (nilai*10) + (tokens[i] - '0');
+                            i++;
+                        }
+                        i--;
+                        values.push(nilai*-1);
+                    } else {
+                        values.push(-1);
+                        ops.push('*');
+                    }
+                } else {
+                    while(!ops.empty() && precedence(ops.top()) >= precedence(tokens[i]) && !isOpsi(tokens[i-1])){
+                        if(ops.top() == '%'){
+                            int nilai2 = values.top(); values.pop();
+                            int nilai1 = values.top(); values.pop();
+                            ops.pop();
+                            values.push(nilai1%nilai2);
+                            } else {
+                            double nilai2 = values.top(); values.pop();
+                               double nilai1 = values.top(); values.pop();
+                            char op = ops.top(); ops.pop();
+                            values.push(applyOp(nilai1, nilai2, op));
+                        }
+                    }
+                    if((isdigit(tokens[i+1]) || tokens[i+1]=='(') && (isdigit(tokens[i-1]) || tokens[i-1]==')'))
+                        ops.push(tokens[i]);
+                    else{
+                        values.push(-1);
+                        ops.push('*');
+                    }
+                } 
+            }
     
