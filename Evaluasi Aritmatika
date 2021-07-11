@@ -1,1 +1,39 @@
-
+#include <bits/stdc++.h>
+using namespace std;
+long unsigned int i;
+double isOpsi(char opsi){
+    if(opsi=='+'||opsi=='-'||opsi=='*'||opsi=='/'||opsi=='%')
+        return true;
+    return false;
+}
+int precedence(char opsi){
+    if(opsi=='+'||opsi=='-') return 1;
+    if(opsi=='*'||opsi=='/'||opsi=='%') return 2;
+    return 0;
+}
+double applyOp(double a, double b, char op){
+    switch(op){
+        case '+': return a + b;
+        case '-': return a - b;
+        case '*': return a * b;
+        case '/': return a / b;
+        }
+    return 0;
+}
+void evaluate(string tokens){
+    
+    stack<double>values;
+    stack<char>ops;
+    
+    for(i=0; i<tokens.length(); i++){
+        
+        if(isdigit(tokens[i])){
+            int nilai=0;
+            while(i<tokens.length() && isdigit(tokens[i])){
+                nilai = (nilai*10) + (tokens[i] - '0');
+                i++;
+            }
+            i--;
+            values.push(nilai);
+        }
+    
